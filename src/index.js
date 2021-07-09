@@ -13,6 +13,28 @@ function Square(props) {
     );
 }
 
+function HistoryBoard(props) {
+    return (
+        <div>
+            <div className="history-board">
+                <div className="square">{props.currentBoard[0]}</div>
+                <div className="square">{props.currentBoard[1]}</div>
+                <div className="square">{props.currentBoard[2]}</div>
+             </div>
+             <div className="history-board">
+                <div className="square">{props.currentBoard[3]}</div>
+                <div className="square">{props.currentBoard[4]}</div>
+                <div className="square">{props.currentBoard[5]}</div>
+             </div>
+             <div className="history-board">
+                <div className="square">{props.currentBoard[6]}</div>
+                <div className="square">{props.currentBoard[7]}</div>
+                <div className="square">{props.currentBoard[8]}</div>
+             </div>
+        </div>
+    );
+}
+
 class Board extends React.Component {
     renderSquare(i) {
         return (
@@ -94,10 +116,10 @@ class Game extends React.Component {
             const desc = move ?
                 'Go to move #' + move :
                 'Go to game start';
-            
             return (
                 <li key={move}>
                     <button onClick={() => this.jumpTo(move)}>{desc}</button>
+                    <HistoryBoard className="history-board" currentBoard={this.state.history[move].squares}/>
                 </li>
             )
         });
@@ -113,7 +135,7 @@ class Game extends React.Component {
         return (
             <div className="game">
                 <div className="game-board">
-                    <Board 
+                    <Board
                         squares={current.squares}
                         onClick={(i) => this.handleClick(i)}
                     />

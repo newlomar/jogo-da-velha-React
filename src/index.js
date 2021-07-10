@@ -45,7 +45,7 @@ class Board extends React.Component {
         );
     }
 
-    render() {
+    gerarBoard() {
         let boardRows = [];
         let counter = 0;
 
@@ -57,10 +57,16 @@ class Board extends React.Component {
             }
             boardRows.push(<div className="board-row">{row}</div>);
         }
-        
+        return boardRows;
+    }
+
+    render() {
+
+        let board = this.gerarBoard();
+
         return (
             <div>
-                {boardRows}
+                {board}
                 {/* <div className="board-row">
                     {this.renderSquare(0)}
                     {this.renderSquare(1)}

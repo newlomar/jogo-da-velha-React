@@ -64,3 +64,7 @@ margin-left: 20px;
 .history-board {
     margin-top: 10px;
 }
+
+.current-board {
+    font-weight: 900;
+}

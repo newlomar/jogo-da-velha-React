@@ -82,6 +82,7 @@ class Game extends React.Component {
             }],
             stepNumber: 0,
             xIsNext: true,
+            historyReversed: false,
         };
     }
 
@@ -110,26 +111,52 @@ class Game extends React.Component {
         });
     }
 
-    render() {
-        const history = this.state.history;
-        const current = history[this.state.stepNumber];
-        const winner = calculateWinner(current.squares);
-        console.log(current);
-        const moves = history.map((step, move) => {
+    reordernar() {
+        if (!(this.state.historyReversed)) {
+            this.setState({
+                historyReversed: true,
+            });
+        }
+        else {
+            this.setState({
+                historyReversed: false,
+            });
+        }
+    }
+
+    gerarBoardHistorico() {
+        let history = this.state.history;
+        console.log(history);
+        if (this.state.historyReversed) {
+            history = this.state.history.slice(0).reverse();
+            console.log(history);
+        }
+
+        const moves = history.sort((a, b) => (b - a)).map((step, move) => {
             const desc = move ?
                 'Go to move #' + move :
                 'Go to game start';
             return (
                 <li key={move}>
                     {
-                        move === this.state.stepNumber ? 
+                        move === this.state.stepNumber ?
                         <button className="current-board" onClick={() => this.jumpTo(move)}>{desc}</button> : 
                         <button onClick={() => this.jumpTo(move)}>{desc}</button>
                     }
-                    <HistoryBoard className="history-board" currentBoard={this.state.history[move].squares}/>
+                    <HistoryBoard className="history-board" currentBoard={history[move].squares}/>
                 </li>
             )
         });
+
+        return moves;
+    }
+
+    render() {
+        const history = this.state.history;
+        const current = history[this.state.stepNumber];
+        const winner = calculateWinner(current.squares);
+
+        const moves = this.gerarBoardHistorico();
 
         let status;
         if (winner) {
@@ -149,7 +176,8 @@ class Game extends React.Component {
                 </div>
                 <div className="game-info">
                     <div>{status}</div>
-                    <ol>{moves}</ol>
+                    <button className="reorder" onClick={() => this.reordernar()}>Reordenar</button>
+                    {this.state.historyReversed ? <ol reversed={true}>{moves}</ol> : <ol>{moves}</ol>}
                 </div>
             </div>
         );

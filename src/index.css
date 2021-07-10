@@ -68,3 +68,7 @@ margin-left: 20px;
 .current-board {
     font-weight: 900;
 }
+
+.reorder {
+    height: 30px;
+}

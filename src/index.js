@@ -126,16 +126,22 @@ class Game extends React.Component {
 
     gerarBoardHistorico() {
         let history = this.state.history;
-        console.log(history);
         if (this.state.historyReversed) {
             history = this.state.history.slice(0).reverse();
-            console.log(history);
         }
 
-        const moves = history.sort((a, b) => (b - a)).map((step, move) => {
+        let counter = 0;
+
+        const moves = history.map((step, move) => {
+
+            if (this.state.historyReversed) {
+                move = (this.state.history.length - 1) - counter;
+                counter++;
+            }
+
             const desc = move ?
-                'Go to move #' + move :
-                'Go to game start';
+            'Go to move #' + move :
+            'Go to game start';
             return (
                 <li key={move}>
                     {
@@ -143,7 +149,10 @@ class Game extends React.Component {
                         <button className="current-board" onClick={() => this.jumpTo(move)}>{desc}</button> : 
                         <button onClick={() => this.jumpTo(move)}>{desc}</button>
                     }
-                    <HistoryBoard className="history-board" currentBoard={history[move].squares}/>
+                    {
+                        this.state.historyReversed ? 
+                        <HistoryBoard className="history-board" currentBoard={history[counter - 1].squares} /> : <HistoryBoard className="history-board" currentBoard={history[move].squares} />
+                    }
                 </li>
             )
         });

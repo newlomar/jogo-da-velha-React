@@ -46,9 +46,22 @@ class Board extends React.Component {
     }
 
     render() {
+        let boardRows = [];
+        let counter = 0;
+
+        for(let i = 0; i < 3; i++) {
+            let row = [];
+            for(let j = 0; j < 3; j++) {
+                row.push(this.renderSquare(counter));
+                counter++;
+            }
+            boardRows.push(<div className="board-row">{row}</div>);
+        }
+        
         return (
             <div>
-                <div className="board-row">
+                {boardRows}
+                {/* <div className="board-row">
                     {this.renderSquare(0)}
                     {this.renderSquare(1)}
                     {this.renderSquare(2)}
@@ -62,7 +75,7 @@ class Board extends React.Component {
                     {this.renderSquare(6)}
                     {this.renderSquare(7)}
                     {this.renderSquare(8)}
-                </div>
+                </div> */}
             </div>
         );
     }

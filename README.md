@@ -2,7 +2,7 @@
 
 ## Criado a partir do tutorial da documentação: https://pt-br.reactjs.org/tutorial/tutorial.html
 
-### Ao final do tutorial, há uma indicação de ideias para melhorar o funcionamento do jogo e dos seus recursos. Até o momento, realizei as 4 primeiras ideias sugeridas, são elas:
+### Ao final do tutorial, há uma indicação de 6 ideias para melhorar o funcionamento do jogo e dos seus recursos. Até o momento, realizei as 4 primeiras ideias sugeridas, são elas:
 
 - Mostrar a localização de cada jogada no formato (col,row), para cada jogada no histórico.
 - Estilizar com negrito o item da lista de jogadas que está selecionado no momento.

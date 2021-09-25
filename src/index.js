@@ -153,7 +153,8 @@ class Game extends React.Component {
                     }
                     {
                         this.state.historyReversed ? 
-                        <HistoryBoard className="history-board" currentBoard={history[counter - 1].squares} /> : <HistoryBoard className="history-board" currentBoard={history[move].squares} />
+                            <HistoryBoard className="history-board" currentBoard={history[counter - 1].squares} /> : 
+                            <HistoryBoard className="history-board" currentBoard={history[move].squares} />
                     }
                 </li>
             )
